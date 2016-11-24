@@ -1,14 +1,27 @@
-package model;
+package Assocation_onetoone;
 
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-@Embeddable
-public class Address {
-
+@Entity
+public class CitizenAddress {
+	@Id
+	@GeneratedValue(strategy = GenerationType.TABLE)
+	private int id;
 	private String street;
 	private String road;
 	private String city;
 	private String zipcode;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getStreet() {
 		return street;

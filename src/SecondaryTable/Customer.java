@@ -1,4 +1,4 @@
-package model;
+package SecondaryTable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

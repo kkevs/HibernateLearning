@@ -1,4 +1,4 @@
-package model;
+package EmbeddedEmbeddable;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;

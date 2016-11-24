@@ -1,25 +1,25 @@
-package main;
+package CompoudId;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import model.Customer;
 import util.HibernateUtil;
 
-public class CustomerTest {
+public class AccountTest {
 
 	public static void main(String[] args) {
-		//Create two tables associated with the model
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		Customer customer = new Customer();
-		customer.setAddress("ankara");
-		customer.setName("kevser");
-		session.persist(customer);
+
+		CompoundKey compoundKey = new CompoundKey(1,1233);
+		Accounts accounts = new Accounts();
+		accounts.setCompoundKey(compoundKey);
+		accounts.setAccountBalance(123);
+
+		session.persist(accounts);
 		session.getTransaction().commit();
 		session.close();
-
 	}
 
 }

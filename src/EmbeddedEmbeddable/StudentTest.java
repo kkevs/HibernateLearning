@@ -1,10 +1,8 @@
-package main;
+package EmbeddedEmbeddable;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import model.Address;
-import model.Student;
 import util.HibernateUtil;
 
 public class StudentTest {

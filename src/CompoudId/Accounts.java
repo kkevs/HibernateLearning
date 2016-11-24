@@ -1,13 +1,11 @@
-package model;
+package CompoudId;
 
 import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
-// @Table(name = "account")
 public class Accounts implements Serializable {
 	/**
 	 * 
