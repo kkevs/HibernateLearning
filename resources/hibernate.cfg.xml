@@ -15,10 +15,7 @@
 
 		<property name="hbm2ddl.auto">create-drop</property>
 
-		<mapping class="SecondaryTable.Customer" />
-		<mapping class="EmbeddedEmbeddable.Student" />
-		<mapping class="CompoudId.Accounts" />
-		<mapping class="Assocation_onetoone.Citizen" />
-		<mapping class="Assocation_onetoone.CitizenAddress" />
+		<mapping class="Assocation_onetomany.Student" />
+		<mapping class="Assocation_onetomany.University" />
 	</session-factory>
 </hibernate-configuration>
