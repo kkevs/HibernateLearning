@@ -15,7 +15,7 @@
 
 		<property name="hbm2ddl.auto">create-drop</property>
 
-		<mapping class="Assocation_onetomany.Student" />
-		<mapping class="Assocation_onetomany.University" />
+		<!-- veritabanına eklemek istediğiniz entity class adını yazınız 
+		<mapping class="" /> -->
 	</session-factory>
 </hibernate-configuration>
