@@ -17,8 +17,7 @@
 
 		<!-- veritabanına eklemek istediğiniz entity class adını yazınız <mapping 
 			class="" /> -->
-		<mapping class="Inheritance.Vehicle" />
-		<mapping class="Inheritance.TwoWheeler" />
-		<mapping class="Inheritance.FourWheeler" />
+		<mapping class="HQL.Workers" />
+		
 	</session-factory>
 </hibernate-configuration>
