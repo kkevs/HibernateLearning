@@ -9,7 +9,11 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.LogicalExpression;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.ProjectionList;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import util.HibernateUtil;
@@ -23,15 +27,16 @@ public class CriteriaTest {
 		session.beginTransaction();
 
 		CriteriaTest test = new CriteriaTest();
-
-		String action = "executeEqualsCriteria"; // action change method name
-		if (action.equalsIgnoreCase("addRecord")) {
-			test.addRecord(session);
-		} else {
-			Method method = CriteriaTest.class.getMethod(action, new Class[] { Session.class });
-			method.invoke(test, new Object[] { session });
-		}
+		//
+		// String action = "executeEqualsCriteria"; // action change method name
+		// if (action.equalsIgnoreCase("addRecord")) {
 		// test.addRecord(session);
+		// } else {
+		// Method method = CriteriaTest.class.getMethod(action, new Class[] {
+		// Session.class });
+		// method.invoke(test, new Object[] { session });
+		// }
+		test.addRecord(session);
 		session.getTransaction().commit();
 		session.close();
 	}
@@ -121,4 +126,54 @@ public class CriteriaTest {
 
 	}
 
+	public void executeDisjunctionCriteria(Session session) {
+		Criteria crit = session.createCriteria(Employee.class);
+		Criterion salary = Restrictions.gt("salary", 1500);
+		Criterion name = Restrictions.like("emp_name", "K%");
+		Criterion surname = Restrictions.ilike("emp_surname", "K%");
+		Disjunction disjunction = Restrictions.disjunction();
+		disjunction.add(salary);
+		disjunction.add(name);
+		disjunction.add(surname);
+		crit.add(disjunction);
+		List results = crit.list();
+		displayCriteriaList(results);
+	}
+
+	public void executeOrderCriteria(Session session) {
+		Criteria crit = session.createCriteria(Employee.class);
+		crit.add(Restrictions.gt("salary", 1400));
+		crit.addOrder(Order.desc("salary"));
+		List results = crit.list();
+		displayCriteriaList(results);
+	}
+
+	public void executeAggregatesCriteria(Session session) {
+		Criteria crit = session.createCriteria(Employee.class);
+		ProjectionList projList = Projections.projectionList();
+		projList.add(Projections.max("salary"));
+		projList.add(Projections.min("salary"));
+		projList.add(Projections.avg("salary"));
+		projList.add(Projections.countDistinct("emp_name"));
+		crit.setProjection(projList);
+		// different use
+		List results = crit.list();
+		displayObjectsList(results);
+	}
+
+	public void displayObjectsList(List list) {
+		Iterator iter = list.iterator();
+		if (!iter.hasNext()) {
+			System.out.println("No objects to display.");
+			return;
+		}
+		while (iter.hasNext()) {
+			Object[] obj = (Object[]) iter.next();
+			for (int i = 0; i < obj.length; i++) {
+				System.out.print(obj[i] + " ");
+			}
+			System.out.println();
+		}
+
+	}
 }
