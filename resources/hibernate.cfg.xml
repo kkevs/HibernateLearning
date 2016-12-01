@@ -13,11 +13,11 @@
 
 		<property name="show_sql">true</property>
 
-		<property name="hbm2ddl.auto">create-drop</property>
+		<property name="hbm2ddl.auto">update</property>
 
 		<!-- veritabanına eklemek istediğiniz entity class adını yazınız <mapping 
 			class="" /> -->
-		<mapping class="HQL.Workers" />
-		
+		<mapping class="CriteriaQueries.Employee" />
+
 	</session-factory>
 </hibernate-configuration>
